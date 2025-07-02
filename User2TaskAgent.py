@@ -50,23 +50,12 @@ def get_task_from_utterance(utterance: str) -> dict:
 
         # JSON文字列をPython辞書に変換
         extracted_data = json.loads(response_text)
-
-        # 期待されるキーが存在し、値が文字列であることを確認
-        place = extracted_data.get("place", "")
-        budget = str(extracted_data.get("budget", ""))
-        genre = extracted_data.get("genre", "")
         
-        if len(place) > 1 and place[-1] == "":
-            place = place[:-1]
-        if len(genre) > 1 and genre[-1] == "":
-            genre = genre[:-1]
+        logging.info(f"抽出されたデータ: {extracted_data}")
+        # タスク情報を抽出
+        task = extracted_data.get("task", "")
 
-        # 念のため、許可された値以外が含まれていないかチェック (プロンプトで指示済みだが保険)
-        if budget is None or not budget.isdigit():
-            logging.warning(f"予期しない予算 '{budget}' が抽出されました。空文字に設定します。")
-            budget = ""
-
-        result = {"place": place, "budget": budget, "genre": genre}
+        result = {"task": task}
         logging.info(f"抽出・整形後の結果: {result}")
         return result
 
@@ -76,7 +65,7 @@ def get_task_from_utterance(utterance: str) -> dict:
         return DEFAULT_TASK_INFO.copy()
     except Exception as e:
         # API呼び出し中のエラーやその他の予期せぬエラー
-        logging.error(f"天気情報の抽出中に予期せぬエラーが発生しました: {e}")
+        logging.error(f"タスクの抽出中に予期せぬエラーが発生しました: {e}")
         # エラーによっては response オブジェクトが存在しない可能性もある
         try:
             logging.error(f"Gemini Safety Feedback (if available): {response.prompt_feedback}")
