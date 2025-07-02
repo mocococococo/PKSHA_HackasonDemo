@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import json
 import logging
+from CreateTask2Data import TaskDataSession
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -14,7 +15,6 @@ genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.0-flash-exp')
 
 DEFAULT_TASK_INFO = {"task": ""}
-
     
 def get_task_from_utterance(utterance: str) -> dict:
     if not model:
@@ -76,14 +76,24 @@ def get_task_from_utterance(utterance: str) -> dict:
 
 # --- 実行例 ---
 if __name__ == "__main__":
-    test_utterances = [
-        "最近引っ越してきたんですけど..."
-    ]
-
     if model: # モデルが正常に初期化された場合のみ実行
-        for utt in test_utterances:
-            info = get_task_from_utterance(utt)
-            print(f"発話: 「{utt}」 -> 抽出結果: {info}")
+        #utt = input("発話を入力してください> ")
+        utt = "最近引っ越しをしたんですけど..."
+        info = get_task_from_utterance(utt)
+        print(f"発話: 「{utt}」 -> 抽出結果: {info}")
+        task_name = info.get("task")
+        try:
+            session = TaskDataSession(task_name)
+        except ValueError as e:
+            logging.error(f"タスクセッションの初期化に失敗しました: {e}")
+            print(f"タスクセッションの初期化に失敗しました: {e}")
+            exit(1)
+        while session.has_next():
+            response = input(session.next_prompt())
+            session.process_response(response)
+        collected_data = session.get_collected()
+        print(f"収集されたデータ: {collected_data}")
+
     else:
         print("Geminiモデルが利用できないため、テストを実行できません。")
         print("apikey.json内の 'GeminiAPIKey' を設定して、再度実行してください。")
