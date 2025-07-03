@@ -1,1 +1,5 @@
-postal
+google
+genai
+requests
+pypdf
+reportlab

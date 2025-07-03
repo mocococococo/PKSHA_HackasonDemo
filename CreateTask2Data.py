@@ -6,7 +6,7 @@ class TaskDataSession:
     タスク名と task.json を使って、
     必要なフィールドを１つずつユーザーに問いかけるセッション管理クラス。
     """
-    def __init__(self, task_name: str, task_json_path: str = "task.json"):
+    def __init__(self, task_name: str, task_json_path: str = "json/task.json"):
         # task.json の読み込み
         with open(task_json_path, "r", encoding="utf-8") as f:
             all_tasks = json.load(f).get("tasks", [])

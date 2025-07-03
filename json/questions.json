@@ -1,0 +1,51 @@
+[
+  { "id": "Q1",  "question": "請求・申出日（提出日）を入力してください。（例：2025-07-03）", "type": "text", "answer": "",  "next": "Q2" },
+  { "id": "Q2",  "question": "証明が必要な方（①）の氏名（漢字）を入力してください。",                         "type": "text", "answer": "",  "next": "Q3" },
+  { "id": "Q3",  "question": "証明が必要な方（①）の氏名のフリガナを入力してください。",                       "type": "text", "answer": "",  "next": "Q4" },
+  { "id": "Q4",  "question": "証明が必要な方（①）の生年月日を入力してください。（例：1990-01-01）",           "type": "text", "answer": "",  "next": "Q5" },
+  { "id": "Q5",  "question": "証明が必要な方（①）の住所（郵便番号を含む全て）を入力してください。",             "type": "text", "answer": "",  "next": "Q6_1" },
+
+  { "id": "Q6_1", "question": "証明書の種類として『住民票の写し』が必要ですか？",             "type": "bool", "answer": null, "next": { "Yes": "Q7_1", "No": "Q6_2" } },
+  { "id": "Q6_2", "question": "証明書の種類として『住民票記載事項証明書』が必要ですか？",       "type": "bool", "answer": null, "next": { "Yes": "Q7_1", "No": "Q7_1" } },
+
+  { "id": "Q7_1", "question": "証明は世帯の全部（全員）ですか？",                          "type": "bool", "answer": null, "next": { "Yes": "Q9", "No": "Q7_2" } },
+  { "id": "Q7_2", "question": "証明は世帯の一部（個人）ですか？",                          "type": "bool", "answer": null, "next": { "Yes": "Q8", "No": "Q9" } },
+
+  { "id": "Q8",  "question": "一部（個人）の場合、①以外で記載してほしい方の氏名をカンマ区切りで入力してください。（該当なしの場合は「なし」）", "type": "text", "answer": "",  "next": "Q9" },
+  { "id": "Q9",  "question": "請求部数（通数）を数字で入力してください。",                                                     "type": "text", "answer": "",  "next": "Q10_1" },
+
+  { "id": "Q10_1", "question": "証明書に『本籍』を記載しますか？",                          "type": "bool", "answer": null, "next": "Q10_2" },
+  { "id": "Q10_2", "question": "証明書に『続柄』を記載しますか？",                          "type": "bool", "answer": null, "next": "Q10_3" },
+  { "id": "Q10_3", "question": "証明書に『住民票コード』を記載しますか？",                  "type": "bool", "answer": null, "next": "Q10_4" },
+  { "id": "Q10_4", "question": "証明書に『個人番号(マイナンバー)』を記載しますか？",          "type": "bool", "answer": null, "next": "Q10_5" },
+  { "id": "Q10_5", "question": "証明書に『旧住所』を記載しますか？",                        "type": "bool", "answer": null, "next": "Q10_6" },
+  { "id": "Q10_6", "question": "証明書に『その他』項目を記載しますか？",                    "type": "bool", "answer": null, "next": "Q11" },
+
+  { "id": "Q11", "question": "『住民票コード』を記載する場合、その請求理由を入力してください。（該当しない場合は「なし」）", "type": "text", "answer": "",  "next": "Q12" },
+  { "id": "Q12", "question": "『旧住所』を記載する場合、その旧住所を入力してください。（該当しない場合は「なし」）",          "type": "text", "answer": "",  "next": "Q13" },
+  { "id": "Q13", "question": "『その他』を記載する場合、その内容を入力してください。（該当しない場合は「なし」）",              "type": "text", "answer": "",  "next": "Q14" },
+
+  { "id": "Q14", "question": "証明を使用する方（③）の氏名または法人名を入力してください。",                "type": "text", "answer": "",  "next": "Q15" },
+  { "id": "Q15", "question": "証明を使用する方（③）の住所または法人所在地を入力してください。",            "type": "text", "answer": "",  "next": "Q16" },
+  { "id": "Q16", "question": "証明を使用する方（③）と①の方との関係を入力してください。（例：本人、同一世帯、代理人 等）", "type": "text", "answer": "",  "next": "Q17" },
+  { "id": "Q17", "question": "証明の利用目的を入力してください。（本人・同一世帯員が請求する場合は『不要』と入力）",        "type": "text", "answer": "",  "next": "Q18_1" },
+
+  { "id": "Q18_1", "question": "窓口に来た方は本人ですか？",                         "type": "bool", "answer": null, "next": { "Yes": "Q19", "No": "Q18_2" } },
+  { "id": "Q18_2", "question": "窓口に来た方は同一世帯の方ですか？",                 "type": "bool", "answer": null, "next": { "Yes": "Q19", "No": "Q18_3" } },
+  { "id": "Q18_3", "question": "窓口に来た方は契約者・債権者ですか？",               "type": "bool", "answer": null, "next": { "Yes": "Q19", "No": "Q18_4" } },
+  { "id": "Q18_4", "question": "窓口に来た方はその他の方ですか？",                   "type": "bool", "answer": null, "next": "Q19" },
+
+  { "id": "Q19", "question": "窓口に来た方（④）の氏名を入力してください。",             "type": "text", "answer": "",  "next": "Q20" },
+  { "id": "Q20", "question": "窓口に来た方（④）の住所を入力してください。",             "type": "text", "answer": "",  "next": "Q21" },
+  { "id": "Q21", "question": "窓口に来た方（④）の電話番号を入力してください。",         "type": "text", "answer": "",  "next": "Q22" },
+  { "id": "Q22", "question": "窓口に来た方が『その他』の場合、その続柄・関係を入力してください。（該当なしの場合は「なし」）", "type": "text", "answer": "",  "next": "Q23_0" },
+
+  { "id": "Q23_0", "question": "外国籍に関する情報は該当なしですか？",            "type": "bool", "answer": null, "next": { "Yes": null, "No": "Q23_1" } },
+  { "id": "Q23_1", "question": "『国籍・地域』を記載しますか？",                    "type": "bool", "answer": null, "next": "Q23_2" },
+  { "id": "Q23_2", "question": "『在留資格等』を記載しますか？",                    "type": "bool", "answer": null, "next": "Q23_3" },
+  { "id": "Q23_3", "question": "『在留カード等の番号』を記載しますか？",            "type": "bool", "answer": null, "next": "Q23_4" },
+  { "id": "Q23_4", "question": "『通称名履歴』を記載しますか？",                    "type": "bool", "answer": null, "next": "Q23_5" },
+  { "id": "Q23_5", "question": "『カタカナ表記名』を記載しますか？",                "type": "bool", "answer": null, "next": "Q24" },
+
+  { "id": "Q24", "question": "外国人情報を記載する場合、その具体的な内容を入力してください。（該当しない場合は「なし」）", "type": "text", "answer": "" }
+]

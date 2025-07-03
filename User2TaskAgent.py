@@ -24,7 +24,7 @@ def get_task_from_utterance(utterance: str) -> dict:
     prompt = open("prompt.txt", "r", encoding="utf-8").read()
     prompt = prompt.replace("{utterance}", utterance)
     task_json = None
-    with open("task.json", "r", encoding="utf-8") as f:
+    with open("json/task.json", "r", encoding="utf-8") as f:
         task_json = json.load(f)
     task_json = json.dumps(task_json, ensure_ascii=False)
     prompt = prompt.replace("{task_json}", task_json)
